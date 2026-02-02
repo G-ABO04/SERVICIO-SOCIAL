@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mochila de Emergencia - Cruz Roja Mexicana</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Navegación -->
+    <div class="screen-navigation">
+      <h1 class="screen-title">Mochila de Emergencia - Cruz Roja Mexicana</h1>
+      <div class="nav-buttons">
+        <button class="nav-btn active" data-screen="home">1. Inicio</button>
+        <button class="nav-btn" data-screen="instructions">2. Instrucciones</button>
+        <button class="nav-btn" data-screen="game">3. Juego</button>
+        <button class="nav-btn" data-screen="results">4. Resultados</button>
+      </div>
+    </div>
+
+    <!-- Pantalla 1: Inicio -->
+    <div id="screen-home" class="screen active">
+      <div class="cruz-roja-header">
+        <div class="logo-container">
+          <img src="images/logo.png" alt="Cruz Roja Mexicana" class="logo-img">
+        </div>
+        <div class="header-right">
+          <img src="images/LogoPNRRDa.jpg" alt="Reducción de Riesgos de Desastre" class="header-right-img">
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="content-left">
+          <div class="badge">JUEGO EDUCATIVO</div>
+          <h1>Mochila de Emergencia</h1>
+          <p>Elige un tipo de mochila y arma tu kit con los <b>artículos</b> adecuados para una emergencia.</p>
+
+          <!-- Selector tipo mochila -->
+          <div class="setup-card">
+            <div class="setup-title">Selecciona tipo de mochila</div>
+            <div class="setup-options" id="bagOptions">
+              <label class="setup-option">
+                <input type="radio" name="bagType" value="adulto" checked>
+                <span>Adulto</span>
+              </label>
+              <label class="setup-option">
+                <input type="radio" name="bagType" value="nino">
+                <span>Niño</span>
+              </label>
+              <label class="setup-option">
+                <input type="radio" name="bagType" value="adulto_mayor">
+                <span>Adulto mayor</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="features">
+            <div class="feature"><span class="feature-icon">⏱️</span><span class="feature-text">15 segundos</span></div>
+            <div class="feature"><span class="feature-icon">⚖️</span><span class="feature-text" id="homeWeightText">Máx. —kg</span></div>
+            <div class="feature"><span class="feature-icon">📦</span><span class="feature-text" id="homeMaxItemsText">Máx. — artículos</span></div>
+          </div>
+
+          <button id="start-from-home" class="start-button">
+            Continuar <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="visual-container">
+          <!-- ✅ CAMBIO: emoji -> imagen real -->
+          <div class="mochila-visual">
+            <img src="images/MochilaEmergencia.png" alt="Mochila de emergencia" class="mochila-img">
+          </div>
+
+          <div class="floating-item">💧</div>
+          <div class="floating-item">🏥</div>
+          <div class="floating-item">🔦</div>
+        </div>
+      </div>
+
+      <div class="footer">www.cruzrojamexicana.org.mx</div>
+    </div>
+
+    <!-- Pantalla 2: Instrucciones -->
+    <div id="screen-instructions" class="screen">
+      <div class="instructions-header">
+        <h2>Cómo jugar</h2>
+        <p>
+          Arrastra (o da click) en los <b>artículos</b> para agregarlos a la mochila.
+          Evita errores para no perder vidas.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Selecciona artículos</h3>
+              <p>Arrastra o da click en artículos para agregarlos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Controla el peso</h3>
+              <p>Si pasas del máximo, pierdes vida y no se agrega.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Tiempo límite</h3>
+              <p>Tienes <span class="highlight">15 segundos</span>.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Penalizaciones</h3>
+              <p>Artículos no esenciales y faltantes restan vidas al verificar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="start-challenge" class="instructions-button">Iniciar desafío</button>
+    </div>
+
+    <!-- Pantalla 3: Juego -->
+    <div id="screen-game" class="screen">
+      <div class="game-header">
+        <div class="game-logo">
+          <img src="images/logo.png" alt="Cruz Roja Mexicana" class="game-logo-img">
+          <div class="game-logo-text">
+            <h3 id="gameTitle">Mochila de Emergencia</h3>
+            <p id="gameSubtitle">Cruz Roja Mexicana</p>
+          </div>
+        </div>
+
+        <div class="game-stats">
+          <div class="stat-item">
+            <div class="stat-label">Puntos</div>
+            <div class="stat-value" id="points">0</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label">Tiempo</div>
+            <div class="stat-value time" id="timer">0:15</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label">Vidas</div>
+            <div class="lives-container" id="lives"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="weight-container">
+        <div class="weight-header">
+          <div class="weight-title">Peso de la mochila</div>
+          <div class="weight-value" id="weightText">0.0kg / 0.0kg</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-progress" id="weightProgress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="game-main">
+        <div class="items-section">
+          <div class="section-header">
+            <h3 class="section-title">Artículos disponibles</h3>
+            <p class="section-subtitle">Arrastra o da click</p>
+          </div>
+
+          <div class="items-grid" id="itemsGrid"></div>
+
+          <button id="verify-backpack" class="verify-button">Verificar mochila</button>
+        </div>
+
+        <!-- Panel mochila divertido -->
+        <div class="backpack-section fun-pack" id="backpack-dropzone">
+          <div class="backpack-top fun-pack__top">
+            <div class="pack-badge">
+              <span class="pack-badge__emoji">🎒</span>
+            </div>
+
+            <div class="backpack-meta">
+              <div class="backpack-title">Tu mochila</div>
+
+              <div class="pack-chips">
+                <span class="chip" id="chipCount">0 artículos</span>
+                <span class="chip chip--soft" id="chipWeight">0.0 kg</span>
+              </div>
+
+              <div class="pack-meter" aria-label="Progreso de peso">
+                <div class="pack-meter__bar" id="packMeterBar" style="width:0%"></div>
+              </div>
+
+              <div class="backpack-stats" id="backpack-stats">0 artículos • 0.0kg</div>
+            </div>
+          </div>
+
+          <div class="backpack-items fun-pack__items" id="backpack-items"></div>
+
+          <div class="backpack-footer fun-pack__footer">
+            <div class="hint" id="hint">Arrastra o da click en los artículos para agregarlos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pantalla 4: Resultados -->
+    <div id="screen-results" class="screen">
+      <div class="results-trophy">🏆</div>
+      <h2 class="results-title" id="resultTitle">Resultado</h2>
+      <p class="results-subtitle" id="resultSubtitle">—</p>
+
+      <div class="results-stats">
+        <div class="result-stat">
+          <div class="result-value" id="finalPoints">0</div>
+          <div class="result-label">Puntos</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-value" id="finalCorrect">0/8</div>
+          <div class="result-label">Correctos</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-value" id="finalStars">⭐</div>
+          <div class="result-label">Estrellas</div>
+        </div>
+      </div>
+
+      <div class="key-points">
+        <h3><span>💡</span> Puntos clave</h3>
+        <ul>
+          <li>Prioriza agua, botiquín, luz y comunicación.</li>
+          <li>Evita meter cosas que no ayudan (peso extra).</li>
+          <li>Al verificar se penaliza si faltan esenciales o sobran no esenciales.</li>
+        </ul>
+      </div>
+
+      <!-- ✅ BOTONES RESULTADOS -->
+      <div class="results-actions">
+        <button id="play-again" class="play-again-button">Jugar de nuevo</button>
+        <button id="back-to-home" class="home-button">Volver al inicio</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ✅ LOADER GLOBAL -->
+  <div id="appLoader" class="loader-overlay" aria-hidden="true">
+    <div class="loader-card" role="status" aria-live="polite">
+      <div class="loader-spinner" aria-hidden="true"></div>
+      <div class="loader-texts">
+        <div id="loaderTitle" class="loader-title">Cargando…</div>
+        <div id="loaderSubtitle" class="loader-subtitle">Un momento</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ MODAL: SE ACABÓ EL TIEMPO (SOLO VERIFICAR) -->
+  <div id="timeUpModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="timeUpTitle">
+      <div class="modal-icon">⏰</div>
+      <h3 id="timeUpTitle" class="modal-title">Se acabó el tiempo</h3>
+      <p class="modal-subtitle">Ahora solo puedes verificar tu mochila.</p>
+
+      <div class="modal-actions">
+        <button id="timeUpVerify" class="modal-primary">Verificar mochila</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
